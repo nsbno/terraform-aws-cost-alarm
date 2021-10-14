@@ -11,7 +11,7 @@ locals {
 #                                                 #
 ###################################################
 resource "aws_budgets_budget" "this" {
-  name              = "${var.name_prefix}-monthly-budget"
+  name              = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget"
   budget_type       = "COST"
   limit_amount      = var.account_budget_limit_in_usd
   limit_unit        = "USD"
@@ -29,7 +29,7 @@ resource "aws_budgets_budget" "this" {
 }
 
 resource "aws_sns_topic" "budget" {
-  name = "${var.name_prefix}-monthly-budget"
+  name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget"
   tags = var.tags
 }
 
