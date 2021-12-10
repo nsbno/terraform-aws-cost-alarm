@@ -33,8 +33,8 @@ resource "aws_budgets_budget" "this" {
   }
 }
 
-resource "aws_sns_topic" "budget" {
-  provider = "aws.us-east-1"
+resource "aws_sns_topic" "budgetalarms" {
+  provider = aws.us-east-1
   name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget"
   tags = var.tags
 }
@@ -48,5 +48,5 @@ resource "aws_sns_topic_subscription" "alarms_to_pagerduty" {
   endpoint               = "https://events.pagerduty.com/integration/7b03ab3499434e0fc08abdf0b81f68e1/enqueue"
   protocol               = "https"
   endpoint_auto_confirms = true
-  topic_arn              = aws_sns_topic.budget.arn
+  topic_arn              = aws_sns_topic.budgetalarms.arn
 }
