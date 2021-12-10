@@ -34,6 +34,7 @@ resource "aws_budgets_budget" "this" {
 }
 
 resource "aws_sns_topic" "budget" {
+  provider = "aws.us-east-1"
   name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget"
   tags = var.tags
 }
