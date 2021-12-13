@@ -41,7 +41,7 @@ resource "aws_sns_topic" "budgetalarms" {
 
 resource "aws_sns_topic_policy" "allow_budgets" {
   provider = aws.us-east-1
-  arn    = aws_sns_topic.budget.arn
+  arn    = aws_sns_topic.budgetalarms.arn
   policy = data.aws_iam_policy_document.sns.json
 }
 
