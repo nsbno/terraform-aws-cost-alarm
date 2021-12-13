@@ -39,7 +39,7 @@ resource "aws_sns_topic" "budgetalarms" {
   tags = var.tags
 }
 
-resource "aws_sns_topic_policy" "allow_budgets" {
+resource "aws_sns_topic_policy" "budgetalarms_budgets" {
   arn    = aws_sns_topic.budgetalarms.arn
   policy = data.aws_iam_policy_document.sns.json
 }
