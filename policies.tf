@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "sns" {
       ]
     }
     resources = [
-      aws_sns_topic.budget.arn,
+      aws_sns_topic.budgetalarms.arn,
     ]
   }
 
@@ -39,6 +39,6 @@ data "aws_iam_policy_document" "sns" {
       identifiers = ["budgets.amazonaws.com"]
     }
     actions   = ["SNS:Publish"]
-    resources = [aws_sns_topic.budget.arn]
+    resources = [aws_sns_topic.budgetalarms.arn]
   }
 }
