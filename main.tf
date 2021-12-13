@@ -45,6 +45,7 @@ resource "aws_sns_topic_policy" "budgetalarms_budgets" {
 }
 
 resource "aws_sns_topic_subscription" "budgetalarms_to_pagerduty" {
+  provider               = aws.us-east-1
   endpoint               = "https://events.pagerduty.com/integration/7b03ab3499434e0fc08abdf0b81f68e1/enqueue"
   protocol               = "https"
   endpoint_auto_confirms = true
