@@ -16,6 +16,7 @@ locals {
 #                                                 #
 ###################################################
 resource "aws_budgets_budget" "this" {
+  provider          = aws.us-east-1
   name              = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget"
   budget_type       = "COST"
   limit_amount      = var.account_budget_limit_in_usd
@@ -40,6 +41,7 @@ resource "aws_sns_topic" "budgetalarms" {
 }
 
 resource "aws_sns_topic_policy" "budgetalarms_budgets" {
+  provider = aws.us-east-1
   arn    = aws_sns_topic.budgetalarms.arn
   policy = data.aws_iam_policy_document.sns.json
 }
