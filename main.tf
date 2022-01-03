@@ -34,14 +34,9 @@ resource "aws_budgets_budget" "this" {
 }
 
 resource "aws_sns_topic" "budget_us" {
-  provider = "aws.us-east-1"
+  provider = aws.us-east-1
   name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget-us"
   tags = var.tags
-}
-
-resource "aws_sns_topic_policy" "allow_budgets_us" {
-  arn    = aws_sns_topic.budget_us.arn
-  policy = data.aws_iam_policy_document.sns.json
 }
 
 resource "aws_sns_topic" "budget" {
