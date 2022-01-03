@@ -28,7 +28,7 @@ resource "aws_budgets_budget" "this" {
     threshold                  = 100
     threshold_type             = "PERCENTAGE"
     notification_type          = "FORECASTED"
-    subscriber_sns_topic_arns  = [aws_sns_topic.budget_us.arn]
+    subscriber_sns_topic_arns  = [aws_sns_topic.budget.arn]
     subscriber_email_addresses = var.notification_emails
   }
 }
