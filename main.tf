@@ -28,6 +28,12 @@ resource "aws_budgets_budget" "this" {
   }
 }
 
+resource "aws_sns_topic" "budget_us" {
+  region = "us-east-1"
+  name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget-us"
+  tags = var.tags
+}
+
 resource "aws_sns_topic" "budget" {
   name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget"
   tags = var.tags
