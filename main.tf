@@ -44,7 +44,7 @@ resource "aws_sns_topic_policy" "allow_budgets_us" {
   policy = data.aws_iam_policy_document.sns.json
 }
 
-resource "aws_sns_topic_subscription" "alarms_to_pagerduty" {
+resource "aws_sns_topic_subscription" "alarms_to_pagerduty_us" {
   endpoint               = "https://events.pagerduty.com/integration/7b03ab3499434e0fc08abdf0b81f68e1/enqueue"
   protocol               = "https"
   endpoint_auto_confirms = true
