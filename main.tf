@@ -28,7 +28,7 @@ resource "aws_budgets_budget" "this" {
     threshold                  = 100
     threshold_type             = "PERCENTAGE"
     notification_type          = "FORECASTED"
-    subscriber_sns_topic_arns  = [aws_sns_topic.budget.arn]
+    subscriber_sns_topic_arns  = [aws_sns_topic.budget_us.arn]
     subscriber_email_addresses = var.notification_emails
   }
 }
@@ -37,6 +37,18 @@ resource "aws_sns_topic" "budget_us" {
   provider = "aws.us-east-1"
   name = "${var.tags["environment"]}-${var.name_prefix}-monthly-budget-us"
   tags = var.tags
+}
+
+resource "aws_sns_topic_policy" "allow_budgets_us" {
+  arn    = aws_sns_topic.budget_us.arn
+  policy = data.aws_iam_policy_document.sns.json
+}
+
+resource "aws_sns_topic_subscription" "alarms_to_pagerduty" {
+  endpoint               = "https://events.pagerduty.com/integration/7b03ab3499434e0fc08abdf0b81f68e1/enqueue"
+  protocol               = "https"
+  endpoint_auto_confirms = true
+  topic_arn              = aws_sns_topic.budget_us.arn
 }
 
 resource "aws_sns_topic" "budget" {
