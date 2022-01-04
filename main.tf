@@ -29,7 +29,7 @@ resource "aws_budgets_budget" "this" {
     threshold_type             = "PERCENTAGE"
     notification_type          = "FORECASTED"
     subscriber_sns_topic_arns  = [aws_sns_topic.budget.arn]
-    subscriber_email_addresses = var.notification_emails
+    subscriber_email_addresses = setunion(var.notification_emails, ["aws-budget-alarms-email.obdw3nwx@vyutv.pagerduty.com"])
   }
 }
 
