@@ -19,3 +19,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "env" {
+  description = "A map of tags (key-value pairs) passed to resources."
+  type        = string
+}
