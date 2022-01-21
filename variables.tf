@@ -14,12 +14,6 @@ variable "account_budget_limit_in_usd" {
   default     = "200.0"
 }
 
-variable "tags" {
-  description = "A map of tags (key-value pairs) passed to resources."
-  type        = map(string)
-  default     = {}
-}
-
 variable "env" {
   description = "A map of tags (key-value pairs) passed to resources."
   type        = string
