@@ -35,7 +35,6 @@ resource "aws_budgets_budget" "this" {
 
 resource "aws_sns_topic" "budget" {
   name = "${var.env}-${var.name_prefix}-monthly-budget"
-  tags = var.tags
 }
 
 resource "aws_sns_topic_policy" "allow_budgets" {
