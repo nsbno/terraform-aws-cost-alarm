@@ -48,3 +48,29 @@ resource "aws_sns_topic_subscription" "alarms_to_pagerduty" {
   endpoint_auto_confirms = true
   topic_arn              = aws_sns_topic.budget.arn
 }
+
+###################################################
+#                                                 #
+# Anomaly alarm                                   #
+#                                                 #
+###################################################
+resource "aws_ce_anomaly_monitor" "serviceanomaly" {
+  name                  = "ServiceMonitor"
+  monitor_type          = "DIMENSIONAL"
+  monitor_dimension     = "SERVICE"
+}
+
+resource "aws_ce_anomaly_subscription" "mainsubscription" {
+  name      = "RealtimeAnomalySubscription"
+  threshold = 100
+  frequency = "IMMEDIATE"
+
+  monitor_arn_list = [
+    aws_ce_anomaly_monitor.serviceanomaly.arn,
+  ]
+
+  subscriber {
+    type    = "SNS"
+    address = aws_sns_topic.alarms_to_pagerduty.arn
+  }
+}
