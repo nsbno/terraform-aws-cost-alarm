@@ -62,7 +62,7 @@ resource "aws_ce_anomaly_monitor" "serviceanomaly" {
 
 resource "aws_ce_anomaly_subscription" "mainsubscription" {
   name      = "RealtimeAnomalySubscription"
-  threshold = 100
+  threshold = 250
   frequency = "IMMEDIATE"
 
   monitor_arn_list = [
