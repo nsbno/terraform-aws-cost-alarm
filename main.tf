@@ -71,6 +71,6 @@ resource "aws_ce_anomaly_subscription" "mainsubscription" {
 
   subscriber {
     type    = "SNS"
-    address = aws_sns_topic.alarms_to_pagerduty.arn
+    address = aws_sns_topic.budget.arn
   }
 }
