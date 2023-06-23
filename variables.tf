@@ -14,6 +14,11 @@ variable "account_budget_limit_in_usd" {
   default     = "200.0"
 }
 
+variable "anomaly_threshold_in_usd" {
+  description = "If there is an anomaly in cost above this limit, a message will be sent to SNS."
+  default = 250
+}
+
 variable "env" {
   description = "A map of tags (key-value pairs) passed to resources."
   type        = string
