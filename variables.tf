@@ -16,7 +16,7 @@ variable "account_budget_limit_in_usd" {
 
 variable "anomaly_threshold_in_usd" {
   description = "If there is an anomaly in cost above this limit, a message will be sent to SNS."
-  default = 250
+  default     = 250
 }
 
 variable "env" {
