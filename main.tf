@@ -64,6 +64,7 @@ resource "aws_ce_anomaly_subscription" "mainsubscription" {
   name = "RealtimeAnomalySubscription"
   threshold_expression {
     dimension {
+      key           = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
       values        = [var.anomaly_threshold_in_usd]
       match_options = ["GREATER_THAN_OR_EQUAL"]
     }
