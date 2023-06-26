@@ -55,14 +55,19 @@ resource "aws_sns_topic_subscription" "alarms_to_pagerduty" {
 #                                                 #
 ###################################################
 resource "aws_ce_anomaly_monitor" "serviceanomaly" {
-  name                  = "ServiceMonitor"
-  monitor_type          = "DIMENSIONAL"
-  monitor_dimension     = "SERVICE"
+  name              = "ServiceMonitor"
+  monitor_type      = "DIMENSIONAL"
+  monitor_dimension = "SERVICE"
 }
 
 resource "aws_ce_anomaly_subscription" "mainsubscription" {
-  name      = "RealtimeAnomalySubscription"
-  threshold = var.anomaly_threshold_in_usd
+  name = "RealtimeAnomalySubscription"
+  threshold_expression {
+    dimension {
+      values        = [var.anomaly_threshold_in_usd]
+      match_options = ["GREATER_THAN_OR_EQUAL"]
+    }
+  }
   frequency = "IMMEDIATE"
 
   monitor_arn_list = [
