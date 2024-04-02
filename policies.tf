@@ -32,13 +32,21 @@ data "aws_iam_policy_document" "sns" {
   }
 
   statement {
+    sid = "AWSAnomalyDetectionSNSPublishingPermissions"
+
+    actions = [
+      "SNS:Publish",
+    ]
+
     effect = "Allow"
-    sid    = "AllowAWSBudgets"
+
     principals {
       type        = "Service"
-      identifiers = ["budgets.amazonaws.com"]
+      identifiers = ["costalerts.amazonaws.com"]
     }
-    actions   = ["SNS:Publish"]
-    resources = [aws_sns_topic.budget.arn]
+
+    resources = [
+      aws_sns_topic.budget.arn,
+    ]
   }
 }
