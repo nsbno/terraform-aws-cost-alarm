@@ -17,3 +17,9 @@ variable "anomaly_threshold_percentage" {
   description = "Anomaly in cost above this percentage."
   default     = "100"
 }
+
+variable "notification_emails" {
+  description = "Emails to notify when the alarm is triggered."
+  type        = list(string)
+  default     = []
+}

@@ -50,4 +50,12 @@ resource "aws_ce_anomaly_subscription" "mainsubscription" {
     type    = "EMAIL"
     address = "aws-budget-alarms-email.obdw3nwx@vyutv.pagerduty.com"
   }
+
+  dynamic "subscriber" {
+    for_each = var.notification_emails
+    content {
+      type    = "EMAIL"
+      address = subscriber.value
+    }
+  }
 }
