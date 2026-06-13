@@ -5,10 +5,6 @@ provider "aws" {
 
 data "aws_caller_identity" "this" {}
 
-locals {
-  current_account_id = data.aws_caller_identity.this.account_id
-}
-
 ###################################################
 #                                                 #
 # Anomaly alarm                                   #
@@ -48,7 +44,8 @@ resource "aws_ce_anomaly_subscription" "mainsubscription" {
 
   subscriber {
     type    = "EMAIL"
-    address = "aws-budget-alarms-email.obdw3nwx@vyutv.pagerduty.com"
+    // This email is managed through https://app.datadoghq.eu/organization-settings/events-api-emails
+    address = "event-pq5enmkh@dtdg.eu"
   }
 
   dynamic "subscriber" {
